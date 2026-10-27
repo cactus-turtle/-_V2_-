@@ -11,8 +11,10 @@ layout: null
 <title>선인장 거북이 사주</title>
 <meta name="robots" content="noindex">
 <script>
-/* ── 블로그 게이트: 네이버 블로그를 거쳐 온 방문만 통과시키는 검문 ──
+/* ── 블로그 게이트: 열쇠(?from=kdm2725-saju)가 붙은 링크로 온 방문만 통과시키는 검문 ──
    · 블로그 글에 넣는 링크는 반드시 뒤에 ?from=kdm2725-saju 를 붙일 것
+     (네이버 블로그에서 클릭해 와도 열쇠가 없으면 차단 — 다른 사람 블로그에 열쇠 없이 올린 링크는 안 열림)
+   · 열쇠가 있어도 네이버 블로그나 주소 직접 입력이 아닌 다른 사이트에서 오면 차단
    · 검문 통과 후에는 주소창에서 ?from=... 을 지워, 주소를 복사해 퍼가도
      다시 열면 차단 화면 → 블로그로 안내되게 함                        */
 (function(){
@@ -24,7 +26,7 @@ layout: null
     var fromBlog=/^https:\/\/(m\.)?blog\.naver\.com\//.test(ref);
     var token=false;
     try{token=new URLSearchParams(location.search).get("from")===TOKEN;}catch(e){}
-    ok=fromBlog||(token&&ref==="");
+    ok=token&&(fromBlog||ref==="");   // 열쇠 필수 + (네이버 블로그에서 왔거나 주소 직접 입력)
   }
   if(ok){
     try{sessionStorage.setItem("sajuGate","ok");}catch(e){}
